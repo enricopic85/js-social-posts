@@ -19,9 +19,9 @@ const post=[
     }
 ];
 let containerHtml=document.getElementById("container");
-let innerPost;
+
 for(i=0;i<post.length;i++){
-    innerPost=post[i];
+   let innerPost=post[i];
     containerHtml.innerHTML +=` 
     <div class="post">
     <div class="post__header">
@@ -42,22 +42,28 @@ for(i=0;i<post.length;i++){
     <div class="post__footer">
         <div class="likes js-likes">
             <div class="likes__cta">
-                <a class="like-button  js-like-button" href="#" data-postid="1">
+                <a class="like-button  js-like-button" href="javascript:void(0)" data-postid="${innerPost.id}">
                     <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                     <span class="like-button__label">Mi Piace</span>
                 </a>
             </div>
             <div class="likes__counter">
-                Piace a <b id="like-counter-1" class="js-likes-counter">${innerPost.numeroLike}</b> persone
+                Piace a <b id="like-counter-${innerPost.id}" class="js-likes-counter">${innerPost.numeroLike}</b> persone
             </div>
         </div> 
     </div>            
     </div>
 `
 }
+let posts=document.querySelectorAll('.like-button');
+for(let i=0;i<posts.length;i++){
+    posts[i].addEventListener('click',function(){
+        let counter=document.getElementById(`like-counter-${i+1}`);
+        post[i].numeroLike++;
+        counter.innerHTML=post[i].numeroLike;
+        posts[i].classList.add("like-button--liked")
+    })
+}
 
-let like=document.querySelector('.js-like-button');
-like.addEventListener('click',function(){
-    like.style.color="blue";
-})
+
 

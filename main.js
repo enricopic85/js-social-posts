@@ -19,7 +19,7 @@ const post=[
     }
 ];
 let containerHtml=document.getElementById("container");
-
+let postLike=[]
 for(i=0;i<post.length;i++){
    let innerPost=post[i];
     containerHtml.innerHTML +=` 
@@ -62,8 +62,9 @@ for(let i=0;i<posts.length;i++){
         post[i].numeroLike++;
         counter.innerHTML=post[i].numeroLike;
         posts[i].classList.add("like-button--liked")
+        postLike.push(post[i].id)
     })
 }
-
+console.log(postLike)
 
 
